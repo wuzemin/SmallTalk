@@ -5,14 +5,12 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.min.smalltalk.R;
 import com.min.smalltalk.base.BaseActivity;
 import com.min.smalltalk.constant.Const;
-import com.xys.libzxing.zxing.activity.CaptureActivity;
 import com.xys.libzxing.zxing.encoding.EncodingUtils;
 
 import butterknife.BindView;
@@ -30,10 +28,10 @@ public class ZxingActivity extends BaseActivity {
     TextView tvTitle;
     @BindView(R.id.iv_zxing)
     ImageView ivZxing;
-    @BindView(R.id.btn)
+    /*@BindView(R.id.btn)
     Button btn;
     @BindView(R.id.textView2)
-    TextView textView2;
+    TextView textView2;*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +39,8 @@ public class ZxingActivity extends BaseActivity {
         setContentView(R.layout.activity_zxing);
         ButterKnife.bind(this);
         Intent intent = getIntent();
-//        String input=intent.getStringExtra("Id");
-        String input = "http://www.baidu.com";
+        String input=intent.getStringExtra("Id");
+//        String input = "http://www.baidu.com";
         String port = getSharedPreferences("config", MODE_PRIVATE).getString(Const.LOGIN_PORTRAIT, "");
         Bitmap bitmap = null;
         bitmap = EncodingUtils.createQRCode(input, 500, 500,
@@ -50,21 +48,21 @@ public class ZxingActivity extends BaseActivity {
         ivZxing.setImageBitmap(bitmap);
     }
 
-    @OnClick({R.id.iv_title_back, R.id.btn})
+    @OnClick(R.id.iv_title_back)
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_title_back:
                 ZxingActivity.this.finish();
                 break;
-            case R.id.btn:
+            /*case R.id.btn:
                 startActivityForResult(new Intent(mContext, CaptureActivity.class), 0);
-                break;
+                break;*/
             default:
                 break;
         }
     }
 
-    @Override
+    /*@Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
@@ -74,6 +72,6 @@ public class ZxingActivity extends BaseActivity {
                 textView2.setText(result);
             }
         }
-    }
+    }*/
 
 }

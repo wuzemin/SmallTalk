@@ -97,7 +97,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 startActivityForResult(intent, 0);
                 break;
             case R.id.sign_in_button:
-                LoadDialog.show(mContext);
                 if (!CommonUtils.isNetConnect(mContext)) {
                     T.showShort(mContext, R.string.no_network);
                     LoadDialog.dismiss(mContext);
@@ -137,6 +136,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         if ("".equals(user) || "".equals(password)) {
             Toast.makeText(LoginActivity.this, "用户名和密码不能为空", Toast.LENGTH_SHORT).show();
         } else if (user != null && password != null) {   ///?phone=18819493906&password=123456
+            LoadDialog.show(mContext);
             HttpUtils.postLoginRequest("/login", user, password, new StringCallback() {
                 @Override
                 public void onError(Call call, Exception e, int id) {
